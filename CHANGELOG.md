@@ -12,6 +12,7 @@ The format is based on Keep a Changelog, and the project intends to use Semantic
 - Local MP4/MOV selection and muted looping playback.
 - Desktop-level playback windows for all connected displays.
 - Menu bar controls for choosing and stopping a wallpaper.
+- A reusable script for building an ad-hoc signed macOS app bundle.
 
 ### Fixed
 

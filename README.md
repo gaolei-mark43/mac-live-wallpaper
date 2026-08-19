@@ -22,6 +22,14 @@ swift run
 
 You can also open `Package.swift` directly in Xcode.
 
+## Package as a macOS app
+
+```sh
+./scripts/package-app.sh
+```
+
+The signed development bundle is created at `.build/release/Mac Live Wallpaper.app`.
+
 ## Roadmap
 
 - [x] Select and loop a local video
