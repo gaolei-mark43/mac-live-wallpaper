@@ -22,7 +22,7 @@ final class WallpaperSession {
 
     func start() {
         window.orderFrontRegardless()
-        player.play()
+        player.playImmediately(atRate: 0.1)
     }
 
     func stop() {
