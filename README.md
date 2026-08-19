@@ -4,7 +4,7 @@ A native macOS application for using local videos as lightweight live wallpapers
 
 ## Status
 
-Early development. The first milestone is a local-only prototype with video selection, looping playback, and energy-aware pausing.
+Early development. The current prototype supports local video selection, muted looping playback, and multiple displays.
 
 ## Requirements
 
@@ -24,11 +24,17 @@ You can also open `Package.swift` directly in Xcode.
 
 ## Roadmap
 
-- Select and loop a local video
-- Render behind desktop icons
-- Support multiple displays
+- [x] Select and loop a local video
+- [x] Render behind desktop icons
+- [x] Support multiple displays
 - Pause during full-screen apps and on battery
 - Add optional launch-at-login support
+
+## Prototype limitations
+
+- The selected video is not restored after relaunch yet.
+- Playback does not pause automatically for full-screen apps or battery power yet.
+- The Swift Package build is intended for development; signed app packaging comes later.
 
 ## Contributing
 

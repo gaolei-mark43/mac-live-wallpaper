@@ -2,27 +2,29 @@ import SwiftUI
 
 @main
 struct MacLiveWallpaperApp: App {
+    @StateObject private var wallpaperController = WallpaperController()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(controller: wallpaperController)
         }
         .windowResizability(.contentSize)
-    }
-}
 
-struct ContentView: View {
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "photo.on.rectangle.angled")
-                .font(.system(size: 42))
-                .foregroundStyle(.blue)
+        MenuBarExtra("Mac Live Wallpaper", systemImage: "photo.on.rectangle.angled") {
+            Button("Choose Video…") {
+                wallpaperController.chooseVideo()
+            }
 
-            Text("Mac Live Wallpaper")
-                .font(.title2.bold())
+            Button("Stop Wallpaper") {
+                wallpaperController.stop()
+            }
+            .disabled(!wallpaperController.isPlaying)
 
-            Text("Native live wallpaper for macOS")
-                .foregroundStyle(.secondary)
+            Divider()
+
+            Button("Quit") {
+                NSApplication.shared.terminate(nil)
+            }
         }
-        .frame(width: 420, height: 240)
     }
 }
