@@ -22,6 +22,10 @@ struct MacLiveWallpaperApp: App {
 
             Divider()
 
+            Toggle("10× Slow Motion", isOn: $wallpaperController.isSlowMotionEnabled)
+
+            Divider()
+
             Button("Quit") {
                 NSApplication.shared.terminate(nil)
             }

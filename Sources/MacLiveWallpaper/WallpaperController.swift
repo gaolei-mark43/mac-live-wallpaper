@@ -6,15 +6,24 @@ import UniformTypeIdentifiers
 @MainActor
 final class WallpaperController: ObservableObject {
     @Published private(set) var state: PlaybackState = .idle
+    @Published var isSlowMotionEnabled: Bool {
+        didSet {
+            UserDefaults.standard.set(isSlowMotionEnabled, forKey: Self.slowMotionDefaultsKey)
+            sessions.forEach { $0.setPlaybackRate(playbackRate) }
+        }
+    }
 
+    private static let slowMotionDefaultsKey = "isSlowMotionEnabled"
     private var sessions: [WallpaperSession] = []
     private var currentVideoURL: URL?
     private nonisolated(unsafe) var screenObserver: NSObjectProtocol?
 
     var isPlaying: Bool { state.isPlaying }
     var statusMessage: String { state.message }
+    private var playbackRate: Float { isSlowMotionEnabled ? 0.1 : 1.0 }
 
     init() {
+        isSlowMotionEnabled = UserDefaults.standard.object(forKey: Self.slowMotionDefaultsKey) as? Bool ?? true
         screenObserver = NotificationCenter.default.addObserver(
             forName: NSApplication.didChangeScreenParametersNotification,
             object: nil,
@@ -77,7 +86,7 @@ final class WallpaperController: ObservableObject {
         sessions = screens.map { screen in
             WallpaperSession(videoURL: videoURL, screen: screen)
         }
-        sessions.forEach { $0.start() }
+        sessions.forEach { $0.start(playbackRate: playbackRate) }
 
         state = .playing(filename: videoURL.lastPathComponent, displayCount: sessions.count)
     }

@@ -20,9 +20,14 @@ final class WallpaperSession {
         player.preventsDisplaySleepDuringVideoPlayback = false
     }
 
-    func start() {
+    func start(playbackRate: Float) {
         window.orderFrontRegardless()
-        player.playImmediately(atRate: 0.1)
+        player.playImmediately(atRate: playbackRate)
+    }
+
+    func setPlaybackRate(_ playbackRate: Float) {
+        guard player.rate != 0 else { return }
+        player.rate = playbackRate
     }
 
     func stop() {

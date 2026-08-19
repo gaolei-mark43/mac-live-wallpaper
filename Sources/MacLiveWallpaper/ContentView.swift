@@ -31,6 +31,9 @@ struct ContentView: View {
                 .disabled(!controller.isPlaying)
             }
 
+            Toggle("10× Slow Motion", isOn: $controller.isSlowMotionEnabled)
+                .toggleStyle(.switch)
+
             Text("MP4 and MOV are recommended. Playback is muted and loops automatically.")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
